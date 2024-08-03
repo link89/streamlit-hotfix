@@ -25,10 +25,13 @@ Otherwise, the patch may not work as expected.
 ### Load streamlit assets from CDN
 
 ```bash
+# dump assets to a folder
 st-hotfix cdn dump streamit ./path/to/streamlit-assets
 
 # now you can distribut streamlit-assets with CDN, for example jsDelivr 
+# e.g: https://cdn.jsdelivr.net/gh/link89/assets@0.1.0/cdn/streamlit/
 
+# then you can patch streamlit to load assets from CDN
 st-hotfix cdn patch streamlit --cdn_url https://cdn.jsdelivr.net/gh/link89/assets@0.1.0/cdn/streamlit/
 ```
 Now when you run your streamlit app, it will load assets from the CDN.
