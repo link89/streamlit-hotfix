@@ -12,7 +12,6 @@ class Cmd:
         return CdnCmd()
 
 
-
 def main():
     fire.Fire(Cmd)
 

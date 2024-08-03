@@ -9,7 +9,7 @@ from .util import find_pkg_dir
 
 class CdnCmd:
     """
-    CDN related commands.
+    Commands for hotfixing streamlit and streamlit compoents to use CDN.
     """
 
     @property
