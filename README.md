@@ -28,11 +28,11 @@ Otherwise, the patch may not work as expected.
 ```bash
 st-hotfix cdn dump streamit ./path/to/streamlit-assets
 
-# now you can distribut streamlit-assets with CDN, for example https://cdn.example.com/streamlit
+# now you can distribut streamlit-assets with CDN, for example jsDelivr 
 
-st-hotfix cdn patch streamlit --cdn_url https://cdn.example.com/streamlit
+st-hotfix cdn patch streamlit --cdn_url https://cdn.jsdelivr.net/gh/link89/assets@0.1.0/cdn/streamlit/
 ```
-Now when you run your streamlit app, it will load the assets from the CDN.
+Now when you run your streamlit app, it will load assets from the CDN.
 Note that the CDN tool makes use of the on-the-fly mode of webpack publicPath. 
 Since `streamlit` 1.36.0, the publicPath of streamlit frontend can be override in runtime by setting `window.____WEBPACK_PUBLIC_PATH_OVERRIDE`.
 
