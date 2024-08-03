@@ -1,9 +1,10 @@
-import importlib.util
 import glob
 import shutil
 import os
 
 from bs4 import BeautifulSoup
+
+from .util import find_pkg_dir
 
 
 class CdnCmd:
@@ -93,12 +94,8 @@ def _patch_index_html(html_doc: str, cdn_url: str, script_tempate: str):
     return str(soup)
 
 
-def _get_pkg_dir(pkg_name: str):
-    return importlib.util.find_spec(pkg_name).submodule_search_locations[0]
-
-
 def _get_index_html(pkg_name: str):
-    pkg_path = _get_pkg_dir(pkg_name)
+    pkg_path = find_pkg_dir(pkg_name)
     results = glob.glob(f"{pkg_path}/**/index.html", recursive=True)
     if not results:
         raise ValueError(f"index.html not found in {pkg_name}")
