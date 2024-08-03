@@ -24,7 +24,6 @@ Otherwise, the patch may not work as expected.
 
 ### Load streamlit assets from CDN
 
-
 ```bash
 st-hotfix cdn dump streamit ./path/to/streamlit-assets
 
@@ -41,3 +40,8 @@ If the components are not allow to change the publicPath on-the-fly,
 you have to patch them first by yourself before using this tool to patch it with CDN URL.
 For example: https://github.com/mik-laj/streamlit-ketcher/pull/120/files
 
+You can always revert the patch by running
+
+```bash
+st-hotfix cdn restore streamlit
+```
