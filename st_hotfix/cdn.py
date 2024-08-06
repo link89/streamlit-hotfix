@@ -15,11 +15,11 @@ class CdnCmd:
     @property
     def dump(self):
         return dump
-    
+
     @property
     def patch(self):
         return patch
-    
+
     @property
     def restore(self):
         return restore
@@ -36,9 +36,9 @@ def dump(pkg_name: str, out_dir= './out'):
     static_dir = os.path.dirname(_get_index_html(pkg_name))
     os.makedirs(out_dir, exist_ok=True)
     shutil.copytree(static_dir, out_dir, dirs_exist_ok=True)
-    
 
-def patch(pkg_name: str, cdn_url: str, 
+
+def patch(pkg_name: str, cdn_url: str,
           script_tempate = 'window.__WEBPACK_PUBLIC_PATH_OVERRIDE = "{cdn_url}";'):
     """
     Replace the static assets in the index.html with the cdn_url,
@@ -91,6 +91,9 @@ def _patch_index_html(html_doc: str, cdn_url: str, script_tempate: str):
         if 'href' in tag.attrs:
             old_href = tag['href'].lstrip('.').lstrip('/')
             tag['href'] = f"{cdn_url}{old_href}"
+        if 'src' in tag.attrs:
+            old_src = tag['src'].lstrip('.').lstrip('/')
+            tag['src'] = f"{cdn_url}{old_src}"
     return str(soup)
 
 
