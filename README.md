@@ -1,4 +1,9 @@
 # streamlit-hotfix
+
+[![PyPI version](https://badge.fury.io/py/streamlit-hotfix.svg)](https://badge.fury.io/py/streamlit-hotfix)
+[![PyPI - Downloads](https://img.shields.io/pypi/dm/streamlit-hotfix)](https://pypi.org/project/streamlit-hotfix/)
+[![PyPI - Python Version](https://img.shields.io/pypi/pyversions/streamlit-hotfix)](https://pypi.org/project/streamlit-hotfix/)
+
 A command line tool to provide advanced features (CDN, etc) for streamlit by apply patch to the installed packages.
 
 ## Get started
