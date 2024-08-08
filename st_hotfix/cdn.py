@@ -9,7 +9,7 @@ from .util import find_pkg_dir
 
 class CdnCmd:
     """
-    Commands for hotfixing streamlit and streamlit compoents to use CDN.
+    Command line tools for hot fixing streamlit and streamlit components to use CDN.
     """
 
     @property
@@ -30,7 +30,7 @@ def dump(pkg_name: str, out_dir= './out'):
     Find static assets in the package and dump them to the out_dir.
 
     Args:
-        pkg_name (str): The package name.
+        pkg_name (str): The package name, for example 'streamlit', 'streamlit_ketcher', etc.
         out_dir (str): The output directory
     """
     static_dir = os.path.dirname(_get_index_html(pkg_name))
@@ -39,15 +39,15 @@ def dump(pkg_name: str, out_dir= './out'):
 
 
 def patch(pkg_name: str, cdn_url: str,
-          script_tempate = 'window.__WEBPACK_PUBLIC_PATH_OVERRIDE = "{cdn_url}";'):
+          script_template = 'window.__WEBPACK_PUBLIC_PATH_OVERRIDE = "{cdn_url}";'):
     """
     Replace the static assets in the index.html with the cdn_url,
     and inject the script tag to override the webpack public path.
 
     Args:
-        pkg_name (str): The package name.
+        pkg_name (str): The package name, for example 'streamlit', 'streamlit_ketcher', etc.
         cdn_url (str): The cdn url.
-        script_tempate (str): The script template to inject into the index.html.
+        script_template (str): The script template to inject into the index.html.
     """
     index_html = _get_index_html(pkg_name)
     index_html_bak = f"{index_html}.bak"
@@ -55,7 +55,7 @@ def patch(pkg_name: str, cdn_url: str,
         shutil.copy(index_html, index_html_bak)
     with open(index_html_bak, 'r') as f:
         html_doc = f.read()
-    modified_html = _patch_index_html(html_doc, cdn_url, script_tempate)
+    modified_html = _patch_index_html(html_doc, cdn_url, script_template)
     with open(index_html, 'w') as f:
         f.write(modified_html)
     print(f"file {index_html} patched.")
@@ -84,7 +84,7 @@ def _patch_index_html(html_doc: str, cdn_url: str, script_tempate: str):
     # Add the new script tag
     new_script = soup.new_tag("script")
     new_script.string = script_tempate.format(cdn_url=cdn_url)
-    soup.head.insert(0, new_script)
+    soup.head.insert(0, new_script)  # type: ignore
 
     # Replace all href attributes in <script> and <link> tags
     for tag in soup.find_all(['script', 'link']):
